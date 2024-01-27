@@ -22,7 +22,8 @@ class TareaFactory extends Factory
             'title' => $this->faker->word,
             'description' => $this->faker->sentence,
             'done' => $this->faker->boolean,
-            'id_user_assigned' => 1, // ID del usuario asignado (ajusta según tu entorno)
+            'id_user_assigned' => 1,
+            'id_supervisor_assigned' => 1,
             'id_user_created' => 1,
             'id_user_updated' => 1,
             'created_at' => now(),

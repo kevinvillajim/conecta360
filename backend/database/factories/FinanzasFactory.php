@@ -28,6 +28,8 @@ class FinanzasFactory extends Factory
             'img' => $this->faker->optional()->imageUrl(),
             'id_user_created' => 1,
             'id_user_updated' => 1,
+            'id_user_assigned' => 1,
+            'id_supervisor_assigned' => 1,
             'total' => $this->faker->randomFloat(2, 0, 10000),
             'created_at' => now(),
             'updated_at' => now(),

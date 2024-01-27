@@ -34,6 +34,7 @@ class MetaController extends Controller
         $meta->type = $request->type;
         $meta->description = $request->description;
         $meta->id_user_assigned = $request->id_user_assigned;
+        $meta->id_supervisor_assigned = $request->id_supervisor_assigned;
         $meta->created_at = $request->created_at;
         $meta->updated_at = $request->updated_at;
         $meta->save();
@@ -73,6 +74,7 @@ class MetaController extends Controller
             $meta->type = $request->type;
             $meta->description = $request->description;
             $meta->id_user_assigned = $request->id_user_assigned;
+            $meta->id_supervisor_assigned = $request->id_supervisor_assigned;
             $meta->created_at = $request->created_at;
             $meta->updated_at = $request->updated_at;
             $meta->save();

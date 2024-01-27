@@ -22,7 +22,8 @@ class ProformalistController extends Controller
         $proformalist = new Proformalist();
         $proformalist->id_proformas = $request->id_proformas;
         $proformalist->id_cliente = $request->id_cliente;
-        $proformalist->id_usuario = $request->id_usuario;
+        $proformalist->id_user_assigned = $request->id_user_assigned;
+        $proformalist->id_supervisor_assigned = $request->id_supervisor_assigned;
         $proformalist->status = $request->status;
         $proformalist->price = $request->price;
         $proformalist->created_at = $request->created_at;
@@ -52,7 +53,8 @@ class ProformalistController extends Controller
         if ($proformalist) {
             $proformalist->id_proformas = $request->id_proformas;
             $proformalist->id_cliente = $request->id_cliente;
-            $proformalist->id_usuario = $request->id_usuario;
+            $proformalist->id_user_assigned = $request->id_user_assigned;
+            $proformalist->id_supervisor_assigned = $request->id_supervisor_assigned;
             $proformalist->status = $request->status;
             $proformalist->price = $request->price;
             $proformalist->created_at = $request->created_at;

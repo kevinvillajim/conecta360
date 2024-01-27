@@ -25,7 +25,8 @@ class ProformaController extends Controller
         $proforma->valid_days = $request->valid_days;
         $proforma->id_clientes = $request->id_clientes;
         $proforma->id_productos = $request->id_productos;
-        $proforma->id_user = $request->id_user;
+        $proforma->id_user_assigned = $request->id_user_assigned;
+        $proforma->id_supervisor_assigned = $request->id_supervisor_assigned;
         $proforma->status = $request->status;
         $proforma->observation = $request->observation;
         $proforma->created_at = $request->created_at;
@@ -58,7 +59,8 @@ class ProformaController extends Controller
             $proforma->valid_days = $request->valid_days;
             $proforma->id_clientes = $request->id_clientes;
             $proforma->id_productos = $request->id_productos;
-            $proforma->id_user = $request->id_user;
+            $proforma->id_user_assigned = $request->id_user_assigned;
+            $proforma->id_supervisor_assigned = $request->id_supervisor_assigned;
             $proforma->status = $request->status;
             $proforma->observation = $request->observation;
             $proforma->created_at = $request->created_at;

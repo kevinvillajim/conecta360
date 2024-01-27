@@ -26,6 +26,7 @@ class TareaController extends Controller
         $tarea->description = $request->description;
         $tarea->done = $request->done;
         $tarea->id_user_assigned = $request->id_user_assigned;
+        $tarea->id_supervisor_assigned = $request->id_supervisor_assigned;
         $tarea->id_user_created = $request->id_user_created;
         $tarea->id_user_updated = $request->id_user_updated;
         $tarea->created_at = $request->created_at;
@@ -59,6 +60,7 @@ class TareaController extends Controller
             $tarea->description = $request->description;
             $tarea->done = $request->done;
             $tarea->id_user_assigned = $request->id_user_assigned;
+            $tarea->id_supervisor_assigned = $request->id_supervisor_assigned;
             $tarea->id_user_created = $request->id_user_created;
             $tarea->id_user_updated = $request->id_user_updated;
             $tarea->created_at = $request->created_at;

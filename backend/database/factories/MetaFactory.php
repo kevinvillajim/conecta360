@@ -21,8 +21,8 @@ class MetaFactory extends Factory
             'value' => $this->faker->word,
             'type' => $this->faker->word,
             'description' => $this->faker->sentence,
-            'id_user_assigned' => 1, // ID del usuario asignado (ajusta según tu entorno)
-            'created_at' => now(),
+            'id_user_assigned' => 1,
+            'id_supervisor_assigned' => 1,            'created_at' => now(),
             'updated_at' => now(),
         ];
     }

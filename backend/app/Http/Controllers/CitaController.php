@@ -36,6 +36,7 @@ class CitaController extends Controller
         $cita->id_user_assigned = $request->id_user_assigned;
         $cita->id_user_created = $request->id_user_created;
         $cita->id_user_updated = $request->id_user_updated;
+        $cita->id_supervisor_updated = $request->id_supervisor_updated;
         $cita->created_at = $request->created_at;
         $cita->updated_at = $request->updated_at;
         $cita->save();
@@ -78,6 +79,7 @@ class CitaController extends Controller
             $cita->id_user_assigned = $request->id_user_assigned;
             $cita->id_user_created = $request->id_user_created;
             $cita->id_user_updated = $request->id_user_updated;
+            $cita->id_supervisor_assigned = $request->id_supervisor_assigned;
             $cita->created_at = $request->created_at;
             $cita->updated_at = $request->updated_at;
             $cita->save();

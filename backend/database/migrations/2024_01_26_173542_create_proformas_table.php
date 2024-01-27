@@ -20,8 +20,10 @@ return new class extends Migration
             $table->foreign('id_clientes')->references('id')->on('clientes');
             $table->unsignedBigInteger('id_productos');
             $table->foreign('id_productos')->references('id')->on('productos');
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->unsignedBigInteger('id_user_assigned');
+            $table->foreign('id_user_assigned')->references('id')->on('users');
+            $table->unsignedBigInteger('id_supervisor_assigned');
+            $table->foreign('id_supervisor_assigned')->references('id')->on('users');
             $table->string('status');
             $table->string('observation');
             $table->timestamps();

@@ -28,6 +28,10 @@ return new class extends Migration
             $table->foreign("id_user_created")->references("id")->on("users");
             $table->unsignedBigInteger("id_user_updated");
             $table->foreign("id_user_updated")->references("id")->on("users");
+            $table->unsignedBigInteger('id_user_assigned');
+            $table->foreign('id_user_assigned')->references('id')->on('users');
+            $table->unsignedBigInteger('id_supervisor_assigned');
+            $table->foreign('id_supervisor_assigned')->references('id')->on('users');
             $table->float("total");
             $table->timestamps();
         });

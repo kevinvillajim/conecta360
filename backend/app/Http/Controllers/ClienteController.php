@@ -93,7 +93,8 @@ class ClienteController extends Controller
             $cliente->type = $request->type;
             $cliente->id_user_created = $request->id_user_created;
             $cliente->id_user_updated = $request->id_user_updated;
-            $cliente->id_usuario_assigned = $request->id_usuario_assigned;
+            $cliente->id_user_assigned = $request->id_user_assigned;
+            $cliente->id_supervisor_assigned = $request->id_supervisor_assigned;
             $cliente->created_at = $request->created_at;
             $cliente->updated_at = $request->updated_at;
             $cliente->save();

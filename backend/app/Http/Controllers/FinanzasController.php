@@ -39,6 +39,8 @@ class FinanzasController extends Controller
         $finanzas->img = $request->img;
         $finanzas->id_user_created = $request->id_user_created;
         $finanzas->id_user_updated = $request->id_user_updated;
+        $finanzas->id_user_assigned = $request->id_user_assigned;
+        $finanzas->id_supervisor_assigned = $request->id_supervisor_assigned;
         $finanzas->total = $request->total;
         $finanzas->created_at = $request->created_at;
         $finanzas->updated_at = $request->updated_at;
@@ -85,6 +87,8 @@ class FinanzasController extends Controller
             $finanzas->img = $request->img;
             $finanzas->id_user_created = $request->id_user_created;
             $finanzas->id_user_updated = $request->id_user_updated;
+            $finanzas->id_user_assigned = $request->id_user_assigned;
+            $finanzas->id_supervisor_assigned = $request->id_supervisor_assigned;
             $finanzas->total = $request->total;
             $finanzas->created_at = $request->created_at;
             $finanzas->updated_at = $request->updated_at;

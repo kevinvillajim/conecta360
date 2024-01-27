@@ -17,8 +17,10 @@ return new class extends Migration
             $table->foreign('id_proformas')->references('id')->on('proformas');
             $table->unsignedBigInteger('id_cliente');
             $table->foreign('id_cliente')->references('id')->on('clientes');
-            $table->unsignedBigInteger('id_usuario');
-            $table->foreign('id_usuario')->references('id')->on('users');
+            $table->unsignedBigInteger('id_user_assigned');
+            $table->foreign('id_user_assigned')->references('id')->on('users');
+            $table->unsignedBigInteger('id_supervisor_assigned');
+            $table->foreign('id_supervisor_assigned')->references('id')->on('users');
             $table->string('status');
             $table->float('price');
             $table->timestamps();
