@@ -1,12 +1,12 @@
 import "./App.css";
-import TemplateAdmin from "./components/TemplateAdmin";
+import Users from "./view/admin/Users";
 
 function App() {
-  return (
-    <>
-      <TemplateAdmin content="hola que hace" />
-    </>
-  );
+	return (
+		<>
+			<Users />
+		</>
+	);
 }
 
 export default App;
