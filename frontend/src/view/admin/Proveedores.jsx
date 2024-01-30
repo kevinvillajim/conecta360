@@ -10,22 +10,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import EmailIcon from "@mui/icons-material/Email";
+import LinkIcon from "@mui/icons-material/Link";
 
-function Users() {
+function Proveedores() {
 	const [showMore, setShowMore] = useState(false);
-	const [showDetailRol, setshowDetailRol] = useState({});
 	const [showDetailCreated, setshowDetailCreated] = useState({});
 	const [showDetailUpdated, setshowDetailUpdated] = useState({});
 	const [selectedRows, setSelectedRows] = useState([]);
 	const color = "#93c120";
-
-	const handleDetailRolClick = (rowId) => {
-		setshowDetailRol((prevStates) => ({
-			...prevStates,
-			[rowId]: !prevStates[rowId],
-		}));
-	};
 
 	const handleDetailCreatedClick = (rowId) => {
 		setshowDetailCreated((prevStates) => ({
@@ -42,7 +34,6 @@ function Users() {
 	};
 
 	const hideAll = () => {
-		setshowDetailRol({});
 		setshowDetailCreated({});
 		setshowDetailUpdated({});
 	};
@@ -75,43 +66,28 @@ function Users() {
 	const columns = [
 		{field: "id", headerName: "ID", width: 10},
 		{field: "name", headerName: "Name", width: 150},
-		{field: "email", headerName: "Email", width: 200},
+		{field: "phone1", headerName: "Phone", type: "number", width: 150},
+		{field: "phone2", headerName: "Phone 2", type: "number", width: 150},
 		{
-			field: "id_rol",
-			headerName: "Rol",
-			type: "number",
-			width: 10,
-			renderCell: (params) => (
-				<>
-					<div className="relative">
-						<span
-							className={`text-[${color}] cursor-pointer`}
-							onClick={() => {
-								handleDetailRolClick(params.row.id);
-							}}
-							onMouseLeave={hideAll}
-						>
-							<u>{params.value}</u>
-						</span>
-						<div className={showDetailRol[params.row.id] ? "fixed" : "hidden"}>
-							<div className="bg-[#000] bg-opacity-50 rounded-md shadow-md p-2">
-								<p className="text-[#fff]">{all.roles[params.value].rol}</p>
-							</div>
-						</div>
-					</div>
-				</>
-			),
+			field: "address",
+			headerName: "Address",
+			width: 300,
 		},
 		{
-			field: "ci",
-			headerName: "CI",
+			field: "logo",
+			headerName: "Logo",
+			width: 40,
+			renderCell: (params) => <Avatar alt="Avatar" src={params.value} />,
+		},
+		{
+			field: "web",
+			headerName: "Web",
+			width: 300,
+		},
+		{
+			field: "asessor",
+			headerName: "Asessor",
 			width: 90,
-		},
-		{
-			field: "phone",
-			headerName: "Phone",
-			type: "number",
-			width: 180,
 		},
 		{
 			field: "id_user_created",
@@ -176,12 +152,6 @@ function Users() {
 			),
 		},
 		{
-			field: "avatar",
-			headerName: "Avatar",
-			width: 40,
-			renderCell: (params) => <Avatar alt="Avatar" src={params.value} />,
-		},
-		{
 			field: "actions",
 			headerName: "Actions",
 			type: "number",
@@ -220,11 +190,11 @@ function Users() {
 						<IconButton
 							aria-label="fingerprint"
 							color="secondary"
-							href={`mailto:${params.row.email}`}
+							href={params.row.web}
 							target="_blank"
 							rel="noreferrer"
 						>
-							<EmailIcon />
+							<LinkIcon />
 						</IconButton>
 						<IconButton
 							aria-label="fingerprint"
@@ -239,7 +209,7 @@ function Users() {
 		},
 	];
 
-	const rows = all.users;
+	const rows = all.proveedores;
 
 	return (
 		<>
@@ -263,10 +233,10 @@ function Users() {
 						/>
 					</div>
 				}
-				title="Usuarios"
+				title="Proveedores"
 			/>
 		</>
 	);
 }
 
-export default Users;
+export default Proveedores;

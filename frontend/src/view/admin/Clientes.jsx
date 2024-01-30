@@ -3,7 +3,6 @@ import Template from "../../components/Template";
 import DataTable from "../../components/DataTable";
 import IconButton from "@mui/material/IconButton";
 import all from "../../components/all.js";
-import Avatar from "@mui/material/Avatar";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -12,16 +11,24 @@ import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import EmailIcon from "@mui/icons-material/Email";
 
-function Users() {
+function Clientes() {
 	const [showMore, setShowMore] = useState(false);
-	const [showDetailRol, setshowDetailRol] = useState({});
+	const [showDetailUser, setshowDetailUser] = useState({});
+	const [showDetailSupervisor, setshowDetailSupervisor] = useState({});
 	const [showDetailCreated, setshowDetailCreated] = useState({});
 	const [showDetailUpdated, setshowDetailUpdated] = useState({});
 	const [selectedRows, setSelectedRows] = useState([]);
 	const color = "#93c120";
 
-	const handleDetailRolClick = (rowId) => {
-		setshowDetailRol((prevStates) => ({
+	const handleDetailUserClick = (rowId) => {
+		setshowDetailUser((prevStates) => ({
+			...prevStates,
+			[rowId]: !prevStates[rowId],
+		}));
+	};
+
+	const handleDetailSupervisorClick = (rowId) => {
+		setshowDetailSupervisor((prevStates) => ({
 			...prevStates,
 			[rowId]: !prevStates[rowId],
 		}));
@@ -42,12 +49,12 @@ function Users() {
 	};
 
 	const hideAll = () => {
-		setshowDetailRol({});
+		setshowDetailUser({});
+		setshowDetailSupervisor({});
 		setshowDetailCreated({});
 		setshowDetailUpdated({});
 	};
 
-	console.log(all);
 	const handleShowMore = () => {
 		setShowMore(!showMore);
 	};
@@ -74,39 +81,8 @@ function Users() {
 
 	const columns = [
 		{field: "id", headerName: "ID", width: 10},
-		{field: "name", headerName: "Name", width: 150},
+		{field: "name", headerName: "Name", width: 180},
 		{field: "email", headerName: "Email", width: 200},
-		{
-			field: "id_rol",
-			headerName: "Rol",
-			type: "number",
-			width: 10,
-			renderCell: (params) => (
-				<>
-					<div className="relative">
-						<span
-							className={`text-[${color}] cursor-pointer`}
-							onClick={() => {
-								handleDetailRolClick(params.row.id);
-							}}
-							onMouseLeave={hideAll}
-						>
-							<u>{params.value}</u>
-						</span>
-						<div className={showDetailRol[params.row.id] ? "fixed" : "hidden"}>
-							<div className="bg-[#000] bg-opacity-50 rounded-md shadow-md p-2">
-								<p className="text-[#fff]">{all.roles[params.value].rol}</p>
-							</div>
-						</div>
-					</div>
-				</>
-			),
-		},
-		{
-			field: "ci",
-			headerName: "CI",
-			width: 90,
-		},
 		{
 			field: "phone",
 			headerName: "Phone",
@@ -114,10 +90,81 @@ function Users() {
 			width: 180,
 		},
 		{
+			field: "address",
+			headerName: "Address",
+			width: 400,
+		},
+		{
+			field: "birth",
+			headerName: "Birth",
+			width: 100,
+		},
+		{
+			field: "gender",
+			headerName: "Gender",
+			width: 90,
+		},
+		{
+			field: "id_user_assigned",
+			headerName: "User",
+			type: "number",
+			width: 80,
+			renderCell: (params) => (
+				<>
+					<div className="relative">
+						<span
+							className={`text-[${color}] cursor-pointer`}
+							onClick={() => {
+								handleDetailUserClick(params.row.id);
+							}}
+							onMouseLeave={hideAll}
+						>
+							<u>{params.value}</u>
+						</span>
+						<div className={showDetailUser[params.row.id] ? "fixed" : "hidden"}>
+							<div className="bg-[#000] bg-opacity-50 rounded-md shadow-md p-2">
+								<p className="text-[#fff]">{all.users[params.value].name}</p>
+							</div>
+						</div>
+					</div>
+				</>
+			),
+		},
+		{
+			field: "id_supervisor_assigned",
+			headerName: "Supervisor",
+			type: "number",
+			width: 80,
+			renderCell: (params) => (
+				<>
+					<div className="relative">
+						<span
+							className={`text-[${color}] cursor-pointer`}
+							onClick={() => {
+								handleDetailSupervisorClick(params.row.id);
+							}}
+							onMouseLeave={hideAll}
+						>
+							<u>{params.value}</u>
+						</span>
+						<div
+							className={
+								showDetailSupervisor[params.row.id] ? "fixed" : "hidden"
+							}
+						>
+							<div className="bg-[#000] bg-opacity-50 rounded-md shadow-md p-2">
+								<p className="text-[#fff]">{all.users[params.value].name}</p>
+							</div>
+						</div>
+					</div>
+				</>
+			),
+		},
+		{
 			field: "id_user_created",
 			headerName: "Created",
 			type: "number",
-			width: 50,
+			width: 80,
 			renderCell: (params) => (
 				<>
 					<div className="relative">
@@ -146,9 +193,9 @@ function Users() {
 		},
 		{
 			field: "id_user_updated",
-			headerName: "Updated",
+			headerName: "Upadated",
 			type: "number",
-			width: 50,
+			width: 80,
 			renderCell: (params) => (
 				<>
 					<div className="relative">
@@ -176,12 +223,6 @@ function Users() {
 			),
 		},
 		{
-			field: "avatar",
-			headerName: "Avatar",
-			width: 40,
-			renderCell: (params) => <Avatar alt="Avatar" src={params.value} />,
-		},
-		{
 			field: "actions",
 			headerName: "Actions",
 			type: "number",
@@ -196,7 +237,7 @@ function Users() {
 					<div className={showMore === true ? "inline" : "hidden"}>
 						<IconButton
 							aria-label="fingerprint"
-							color="black"
+							color="secondary.light"
 							onClick={handleShowEdit(params.row.id)}
 						>
 							<EditIcon />
@@ -229,7 +270,9 @@ function Users() {
 						<IconButton
 							aria-label="fingerprint"
 							color="black"
-							onClick={handleShowMore}
+							onClick={() => {
+								handleShowMore();
+							}}
 						>
 							<CloseIcon />
 						</IconButton>
@@ -239,7 +282,7 @@ function Users() {
 		},
 	];
 
-	const rows = all.users;
+	const rows = all.clientes;
 
 	return (
 		<>
@@ -263,10 +306,10 @@ function Users() {
 						/>
 					</div>
 				}
-				title="Usuarios"
+				title="Clientes"
 			/>
 		</>
 	);
 }
 
-export default Users;
+export default Clientes;

@@ -65,7 +65,7 @@ function Template({title, propButton, content}) {
 								<span className="material-symbols-outlined">add</span>
 							</button>
 						</div>
-						<div className="h-[30rem] w-[100%] bg-white rounded-lg p-[1rem] overflow-auto">
+						<div className="h-[31rem] w-[100%] bg-white rounded-lg p-[1rem]">
 							{content}
 						</div>
 					</div>
