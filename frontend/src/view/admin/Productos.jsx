@@ -240,20 +240,14 @@ function Proveedores() {
               selectedRows={selectedRows}
               onSelectionChange={handleSelectionChange}
             />
-            <div className="grid grid-cols-3 gap-4">
-              <Card
-                title="name"
-                model="model"
-                provider="id_proveedor"
-                img="img"
-                description="description"
-                object={all.productos}
-                price="costPVP"
-                categoria="id_categoria"
-                costo="costIva"
-                costoMayor="costMayor"
-              />
-            </div>
+            <Card
+              title="name"
+              model="model"
+              provider="id_proveedor"
+              img="img"
+              description="description"
+              object={all.productos}
+            />
           </div>
         }
         title="Proveedores"
