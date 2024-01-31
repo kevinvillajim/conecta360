@@ -12,9 +12,12 @@ import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkIcon from "@mui/icons-material/Link";
 import Card from "../../components/Card";
+import ListIcon from "@mui/icons-material/List";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 function Proveedores() {
   const [showMore, setShowMore] = useState(false);
+  const [typeSelected, setTypeSelected] = useState(false);
   const [showDetailCreated, setshowDetailCreated] = useState({});
   const [showDetailUpdated, setshowDetailUpdated] = useState({});
   const [selectedRows, setSelectedRows] = useState([]);
@@ -52,6 +55,10 @@ function Proveedores() {
   const handleDelete = (id) => () => {
     // Lógica para eliminar con el ID
     console.log("Delete clicked for ID:", id);
+  };
+
+  const handleTypeSelected = () => {
+    setTypeSelected(!typeSelected);
   };
 
   const handleDeleteSelected = () => {
@@ -225,7 +232,7 @@ function Proveedores() {
       <Template
         content={
           <div>
-            <div className="mb-4">
+            <div className="mb-4 flex justify-between">
               <IconButton
                 aria-label="delete-selected"
                 color="error"
@@ -233,25 +240,41 @@ function Proveedores() {
               >
                 <DeleteSweepIcon />
               </IconButton>
+              <IconButton
+                aria-label="delete-selected"
+                color="black"
+                onClick={handleTypeSelected}
+              >
+                {typeSelected === false ? <DashboardIcon /> : <ListIcon />}
+              </IconButton>
             </div>
-            <DataTable
-              rows={rows}
-              columns={columns}
-              selectedRows={selectedRows}
-              onSelectionChange={handleSelectionChange}
-            />
-            <div className="grid grid-cols-3 gap-4">
+            <div className={typeSelected === true ? "hidden" : "inline"}>
+              <DataTable
+                rows={rows}
+                columns={columns}
+                selectedRows={selectedRows}
+                onSelectionChange={handleSelectionChange}
+              />
+            </div>
+            <div
+              className={
+                typeSelected === true ? "grid grid-cols-4 gap-4" : "hidden"
+              }
+            >
               <Card
                 title="name"
                 model="model"
-                provider="id_proveedor"
+                provider="web"
                 img="img"
-                description="description"
-                object={all.productos}
-                price="costPVP"
-                categoria="id_categoria"
-                costo="costIva"
-                costoMayor="costMayor"
+                description="adderess"
+                object={all.proveedores}
+                price="phone1"
+                categoria="phone2"
+                costo="asesor"
+                costoMayor="id_user_updated"
+                pill={false}
+                money={false}
+                table="Proveedores"
               />
             </div>
           </div>

@@ -3,6 +3,10 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import LinkIcon from "@mui/icons-material/Link";
+import EmailIcon from "@mui/icons-material/Email";
+
 import { useState } from "react";
 
 function Card({
@@ -16,6 +20,9 @@ function Card({
   categoria,
   costo,
   costoMayor,
+  pill,
+  money,
+  table,
 }) {
   const [showMoreProd, setShowMoreProd] = useState(false);
 
@@ -51,13 +58,15 @@ function Card({
           <div className="w-[100%] h-[250px]">
             <img
               src={item[img]}
-              alt={`Product - ${index}`}
+              alt={`${table} - ${index}`}
               className="w-[100%] h-[100%] object-contain"
             />
           </div>
           <p className="">{item[description]}</p>
           <b>
-            <span className="text-lg">{`$${item[price]} `}</span>
+            <span className="text-lg">
+              {money === true ? "$" + item[price] : item[price]}
+            </span>
           </b>
           <div className="flex justify-between">
             <div>
@@ -75,6 +84,39 @@ function Card({
               >
                 <DeleteIcon />
               </IconButton>
+              {item.phone && (
+                <IconButton
+                  aria-label="fingerprint"
+                  color="primary"
+                  href={`https://api.whatsapp.com/send?phone=${item.phone}&text=Hola%20${item.name}.`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <WhatsAppIcon />
+                </IconButton>
+              )}
+              {item.web && (
+                <IconButton
+                  aria-label="fingerprint"
+                  color="secondary"
+                  href={item.web}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <LinkIcon />
+                </IconButton>
+              )}
+              {item.email && (
+                <IconButton
+                  aria-label="fingerprint"
+                  color="secondary"
+                  href={`mailto:${item.email}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <EmailIcon />
+                </IconButton>
+              )}
             </div>
             <div>
               <IconButton
@@ -92,22 +134,30 @@ function Card({
             }
           >
             <div>
-              <h2 className="text-sm mb-[0.5rem]">Categorias:</h2>
+              <h2 className="text-sm mb-[0.5rem]">{categoria}:</h2>
               <div className="flex ">
-                <div className="rounded-full px-[1rem] py-[0.2rem] border-2 border-black">
+                {pill === false ? (
                   <b>{item[categoria]}</b>
-                </div>
+                ) : (
+                  <div className="rounded-full px-[1rem] py-[0.2rem] border-2 border-black">
+                    <b>{item[categoria]}</b>
+                  </div>
+                )}
               </div>
             </div>
             <div>
-              <span className="text-sm">Costo:</span>
+              <span className="text-sm">{costo}:</span>
               <br />
-              <span className="text-lg">{`$${item[costo]} `}</span>
+              <span className="text-lg">
+                {money === true ? "$" + item[costo] : item[costo]}
+              </span>
             </div>
             <div>
-              <span className="text-sm">Costo:</span>
+              <span className="text-sm">{costoMayor}:</span>
               <br />
-              <span className="text-lg">{`$${item[costoMayor]} `}</span>
+              <span className="text-lg">
+                {money === true ? "$" + item[costoMayor] : item[costoMayor]}
+              </span>
             </div>
           </div>
         </div>
@@ -120,13 +170,17 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   model: PropTypes.string.isRequired,
   provider: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  img: PropTypes.string,
+  description: PropTypes.string,
   object: PropTypes.array.isRequired,
-  price: PropTypes.string.isRequired,
-  categoria: PropTypes.string.isRequired,
-  costo: PropTypes.string.isRequired,
-  costoMayor: PropTypes.string.isRequired,
+  price: PropTypes.string,
+  categoria: PropTypes.string,
+  costo: PropTypes.string,
+  costoMayor: PropTypes.string,
+  buttons: PropTypes.node,
+  pill: PropTypes.bool,
+  money: PropTypes.bool,
+  table: PropTypes.string,
 };
 
 export default Card;

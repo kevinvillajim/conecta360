@@ -1,15 +1,19 @@
-import "./App.css";
-import Clientes from "./view/admin/Clientes";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./components/Color";
-import Users from "./view/admin/Users";
-import Proveedores from "./view/admin/Proveedores";
+import RoutesComponent from "./Routes";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+const router = createBrowserRouter([
+  {
+    path: "*",
+    element: <RoutesComponent />,
+  },
+]);
 
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Proveedores />
+        <RouterProvider router={router} />
       </ThemeProvider>
     </>
   );

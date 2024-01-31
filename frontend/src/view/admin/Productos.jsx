@@ -12,9 +12,12 @@ import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkIcon from "@mui/icons-material/Link";
 import Card from "../../components/Card";
+import ListIcon from "@mui/icons-material/List";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 function Proveedores() {
   const [showMore, setShowMore] = useState(false);
+  const [typeSelected, setTypeSelected] = useState(false);
   const [showDetailCreated, setshowDetailCreated] = useState({});
   const [showDetailUpdated, setshowDetailUpdated] = useState({});
   const [selectedRows, setSelectedRows] = useState([]);
@@ -64,35 +67,49 @@ function Proveedores() {
     setSelectedRows(newSelection); // Asegúrate de que estás actualizando el estado correctamente
   };
 
+  const handleTypeSelected = () => {
+    setTypeSelected(!typeSelected);
+  };
+
   const columns = [
     { field: "id", headerName: "ID", width: 10 },
     { field: "name", headerName: "Name", width: 150 },
-    { field: "phone1", headerName: "Phone", type: "number", width: 150 },
-    { field: "phone2", headerName: "Phone 2", type: "number", width: 150 },
+    { field: "model", headerName: "Model", type: "number", width: 150 },
     {
-      field: "address",
-      headerName: "Address",
+      field: "id_categoria",
+      headerName: "Category",
+      type: "number",
+      width: 150,
+    },
+    {
+      field: "description",
+      headerName: "Description",
       width: 300,
     },
     {
-      field: "logo",
-      headerName: "Logo",
+      field: "img",
+      headerName: "Image",
       width: 40,
       renderCell: (params) => (
         <Avatar
-          alt="Avatar"
+          alt="img"
           src={params.value}
         />
       ),
     },
     {
-      field: "web",
-      headerName: "Web",
-      width: 300,
+      field: "costIva",
+      headerName: "Cost",
+      width: 90,
     },
     {
-      field: "asessor",
-      headerName: "Asessor",
+      field: "costMayor",
+      headerName: "P/ Mayor",
+      width: 90,
+    },
+    {
+      field: "costPVP",
+      headerName: "PVP",
       width: 90,
     },
     {
@@ -218,14 +235,14 @@ function Proveedores() {
     },
   ];
 
-  const rows = all.proveedores;
+  const rows = all.productos;
 
   return (
     <>
       <Template
         content={
           <div>
-            <div className="mb-4">
+            <div className="mb-4 flex justify-between">
               <IconButton
                 aria-label="delete-selected"
                 color="error"
@@ -233,24 +250,46 @@ function Proveedores() {
               >
                 <DeleteSweepIcon />
               </IconButton>
+              <IconButton
+                aria-label="delete-selected"
+                color="black"
+                onClick={handleTypeSelected}
+              >
+                {typeSelected === false ? <DashboardIcon /> : <ListIcon />}
+              </IconButton>
             </div>
-            <DataTable
-              rows={rows}
-              columns={columns}
-              selectedRows={selectedRows}
-              onSelectionChange={handleSelectionChange}
-            />
-            <Card
-              title="name"
-              model="model"
-              provider="id_proveedor"
-              img="img"
-              description="description"
-              object={all.productos}
-            />
+            <div className={typeSelected === true ? "hidden" : "inline"}>
+              <DataTable
+                rows={rows}
+                columns={columns}
+                selectedRows={selectedRows}
+                onSelectionChange={handleSelectionChange}
+              />
+            </div>
+            <div
+              className={
+                typeSelected === true ? "grid grid-cols-4 gap-4" : "hidden"
+              }
+            >
+              <Card
+                title="name"
+                model="model"
+                provider="id_proveedor"
+                img="img"
+                description="description"
+                object={all.productos}
+                price="costPVP"
+                categoria="id_categoria"
+                costo="costIva"
+                costoMayor="costMayor"
+                pill={true}
+                money={true}
+                table="Productos"
+              />
+            </div>
           </div>
         }
-        title="Proveedores"
+        title="Productos"
       />
     </>
   );
