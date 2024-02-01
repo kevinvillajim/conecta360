@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_rol')->default(3);
             $table->foreign('id_rol')->references('id')->on('rols');
             $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('id_team')->default(1);
             $table->text('avatar')->default("avatar.png");
             $table->string('phone');
             $table->string('ci');

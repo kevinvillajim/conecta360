@@ -22,7 +22,7 @@ class ProveedorController extends Controller
         $proveedor = new Proveedor();
         $proveedor->name = $request->name;
         $proveedor->logo = $request->logo;
-        $proveedor->phone1 = $request->phone1;
+        $proveedor->phone = $request->phone1;
         $proveedor->phone2 = $request->phone2;
         $proveedor->address = $request->address;
         $proveedor->web = $request->web;
@@ -56,7 +56,7 @@ class ProveedorController extends Controller
         if ($proveedor) {
             $proveedor->name = $request->name;
             $proveedor->logo = $request->logo;
-            $proveedor->phone1 = $request->phone1;
+            $proveedor->phone = $request->phone1;
             $proveedor->phone2 = $request->phone2;
             $proveedor->address = $request->address;
             $proveedor->web = $request->web;

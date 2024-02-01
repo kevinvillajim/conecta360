@@ -38,6 +38,7 @@ class UserController extends Controller
         $user->avatar = $request->avatar;
         $user->phone = $request->phone;
         $user->ci = $request->ci;
+        $user->id_team = $request->id_team;
         $user->id_user_created = $request->id_user_created;
         $user->id_user_updated = $request->id_user_updated;
         $user->remember_token = $request->remember_token;
@@ -87,6 +88,7 @@ class UserController extends Controller
             $user->avatar = $request->avatar;
             $user->phone = $request->phone;
             $user->ci = $request->ci;
+            $user->id_team = $request->id_team;
             $user->id_user_created = $request->id_user_created;
             $user->id_user_updated = $request->id_user_updated;
             $user->remember_token = $request->remember_token;

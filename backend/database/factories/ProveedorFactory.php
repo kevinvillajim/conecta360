@@ -19,7 +19,7 @@ class ProveedorFactory extends Factory
         return [
             'name' => $this->faker->company,
             'logo' => 'logoProv.png',
-            'phone1' => $this->faker->phoneNumber,
+            'phone' => $this->faker->phoneNumber,
             'phone2' => $this->faker->optional()->phoneNumber,
             'address' => $this->faker->address,
             'web' => $this->faker->optional()->url,

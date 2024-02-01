@@ -33,8 +33,9 @@ class UserFactory extends Factory
             'avatar' => 'avatar.png',
             'phone' => $this->faker->phoneNumber,
             'ci' => $this->faker->unique()->numerify('########'),
-            'id_user_created' => 1, // ID del usuario que crea (ajusta según tu entorno)
-            'id_user_updated' => 1, // ID del usuario que actualiza (ajusta según tu entorno)
+            'id_team' => 1,
+            'id_user_created' => 1,
+            'id_user_updated' => 1,
             'remember_token' => Str::random(10),
             'created_at' => now(),
             'updated_at' => now(),

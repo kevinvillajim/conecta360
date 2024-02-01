@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('logo')->default("logoProv.png");
-            $table->string('phone1');
+            $table->string('phone');
             $table->string('phone2')->nullable();
             $table->string('address');
             $table->string('web')->nullable();
