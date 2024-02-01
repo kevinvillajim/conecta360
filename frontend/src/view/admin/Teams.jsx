@@ -1,62 +1,49 @@
 import Template from "../../components/Template";
-import IconButton from "@mui/material/IconButton";
-import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import KanbanBoard from "../../components/DragNDrop/KanbanBoard.tsx";
 import all from "../../components/all.js";
 
 function Teams() {
-  const defaultCols = all.teams;
+	const supervisores = all.teams;
 
-  const asesores = all.users.filter((user) => user.id_rol === 3);
+	const defaultCols = [];
+	supervisores.map((supervisor) => {
+		const col = {
+			id: supervisor.id,
+			name: supervisor.name,
+		};
 
-  const defaultTasks = [];
-  asesores.map((asesor) => {
-    const task = {
-      id: asesor.id,
-      id_user_leader: 1,
-      content: asesor.name,
-    };
+		defaultCols.push(col);
+	});
+	console.log(defaultCols);
+	const asesores = all.users.filter((user) => user.id_rol === 3);
 
-    defaultTasks.push(task);
-  });
+	const defaultTasks = [];
+	asesores.map((asesor) => {
+		const task = {
+			id: "asesor" + asesor.id,
+			id_user_leader: asesor.id_team,
+			content: asesor.name,
+		};
 
-  // const defaultTasks = [
-  //   {
-  //     id: 1,
-  //     id_user_leader: 1,
-  //     content: "List admin APIs for dashboard",
-  //   },
-  //   {
-  //     id: 2,
-  //     id_user_leader: 1,
-  //     content: "List admin A for dashboard",
-  //   },
-  // ];
+		defaultTasks.push(task);
+	});
+	console.log(defaultTasks);
 
-  return (
-    <>
-      <Template
-        content={
-          <div>
-            <div className="mb-4">
-              <IconButton
-                aria-label="delete-selected"
-                color="error"
-                // onClick={handleDeleteSelected}
-              >
-                <DeleteSweepIcon />
-              </IconButton>
-            </div>
-            <KanbanBoard
-              defaultCols={defaultCols}
-              defaultTasks={defaultTasks}
-            />
-          </div>
-        }
-        title="Teams"
-      />
-    </>
-  );
+	return (
+		<>
+			<Template
+				content={
+					<div>
+						<KanbanBoard
+							defaultCols={defaultCols}
+							defaultTasks={defaultTasks}
+						/>
+					</div>
+				}
+				title="Teams"
+			/>
+		</>
+	);
 }
 
 export default Teams;

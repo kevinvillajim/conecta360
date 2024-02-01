@@ -37,12 +37,12 @@ function KanbanBoard({defaultCols, defaultTasks}) {
       className="
         m-auto
         flex
-        min-h-screen
+        h-[full]
         w-full
         items-center
         overflow-x-auto
         overflow-y-hidden
-        px-[40px]
+        px-[2rem]
     "
     >
       <DndContext
@@ -51,7 +51,7 @@ function KanbanBoard({defaultCols, defaultTasks}) {
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
       >
-        <div className="m-auto flex gap-4">
+        <div className="m-1rem flex gap-4">
           <div className="flex gap-4">
             <SortableContext items={columnsId}>
               {columns.map(col => (
@@ -74,17 +74,19 @@ function KanbanBoard({defaultCols, defaultTasks}) {
             }}
             className="
       h-[60px]
-      w-[350px]
-      min-w-[350px]
+      w-[300px]
+      min-w-[300px]
       cursor-pointer
       rounded-lg
-      bg-mainBackgroundColor
+      bg-[#93c120]
+      text-white
       border-2
-      border-columnBackgroundColor
       p-4
-      ring-rose-500
+      my-[1rem]
+      ring-[#13a19b]
       hover:ring-2
       flex
+      justify-center
       gap-2
       "
           >
@@ -147,7 +149,7 @@ function KanbanBoard({defaultCols, defaultTasks}) {
   function createNewColumn() {
     const columnToAdd = {
       id: generateId(),
-      name: `Column ${columns.length + 1}`
+      name:`Column ${columns.length + 1}`
     }
 
     setColumns([...columns, columnToAdd])
