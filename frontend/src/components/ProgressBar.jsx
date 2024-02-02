@@ -1,4 +1,4 @@
-function ProgressBar({ totalValue }) {
+function ProgressBar({ totalValue, nameTeam }) {
   let value = totalValue;
 
   const getColor = (value) => {
@@ -17,6 +17,8 @@ function ProgressBar({ totalValue }) {
   return (
     <>
       <div>
+      <div className="mb-[1.2rem]">
+        {nameTeam}</div>
         <div className="w-full rounded-full h-2.5 bg-gray-200">
           <div
             className={`${color} h-2.5 rounded-full`}

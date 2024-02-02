@@ -7,7 +7,7 @@ function Teams() {
       <Template
         content={
           <div>
-            <ProgressBar totalValue={10} />
+            <ProgressBar totalValue={50} nameTeam="Kevin" />
           </div>
         }
         title="Metas"
