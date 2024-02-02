@@ -18,7 +18,7 @@ function Teams() {
     console.log(`Usuarios para el equipo ${team.id}:`, usersInTeam);
 
     // Puedes ajustar la lógica para obtener el valor deseado del producto usando tu función
-    const someValue = getProductById(team.id, "someProperty", "someTable");
+    const someValue = getProductById(team.id, "someProperty", "teams");
 
     return (
       <div key={team.id}>
@@ -32,9 +32,7 @@ function Teams() {
   return (
     <>
       <Template
-        content={
-          teamsContent
-        }
+        content={ teamsContent }
         title="Metas"
       />
     </>

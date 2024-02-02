@@ -784,7 +784,7 @@ const all = {
     {
       id: 1,
       name: "neque",
-      value: "officiis",
+      value: 80,
       type: "nam",
       description: "Quae aut nemo consequatur eum voluptatem odio et.",
       id_user_assigned: 1,
@@ -795,7 +795,7 @@ const all = {
     {
       id: 2,
       name: "rerum",
-      value: "molestiae",
+      value: 50,
       type: "nobis",
       description: "Voluptas ullam labore ut animi non blanditiis odio.",
       id_user_assigned: 1,
