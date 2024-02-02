@@ -56,10 +56,7 @@ function Template({ title, propButton, content }) {
           >
             <ModalUser isOpen={showMenu} />
           </div>
-          <div
-            className={`p-[2rem] bg-[#e3e3e3] h-[100%]"
-            }`}
-          >
+          <div className="p-[2rem] bg-[#e3e3e3] min-h-[calc(100vh-4rem)]">
             <div className="flex justify-between mb-[1rem]">
               <h1 className="text-[30px] font-bold text-gray-800">{title}</h1>
               <button

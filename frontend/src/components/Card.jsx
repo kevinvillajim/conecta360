@@ -6,14 +6,18 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkIcon from "@mui/icons-material/Link";
 import EmailIcon from "@mui/icons-material/Email";
+import all from "./all.js";
 
 import { useState } from "react";
 
 function Card({
   title,
+  titleId,
   model,
+  modelId,
   provider,
   img,
+  imgId,
   description,
   object,
   price,
@@ -36,6 +40,15 @@ function Card({
     console.log("Delete clicked for ID:", id);
   };
 
+  const getProductById = function (id, it, table) {
+    const filteredProduct = all[table].filter((product) => product.id === id);
+    if (filteredProduct.length > 0) {
+      return filteredProduct[0][it];
+    } else {
+      return it + "no encontrado";
+    }
+  };
+
   return (
     <>
       {object.map((item, index) => (
@@ -44,7 +57,11 @@ function Card({
           className="w-[100%] bg-[white] p-[1rem] rounded-lg shadow-md shadow-[#727272] grid gap-[5px]"
         >
           <div className="flex justify-between">
-            <h1 className="text-left text-2xl">{item[title]}</h1>
+            <h1 className="text-left text-2xl">
+              {titleId && titleId.active === true
+                ? getProductById(item[title], titleId.it, titleId.table)
+                : item[title]}
+            </h1>
             <div id="containerCheck">
               <input
                 type="checkbox"
@@ -53,11 +70,19 @@ function Card({
               />
             </div>
           </div>
-          <h2 className="text-left text-xl">{item[model]}</h2>
+          <h2 className="text-left text-xl">
+            {modelId && modelId.active === true
+              ? getProductById(item[model], modelId.it, modelId.table)
+              : item[model]}
+          </h2>
           <h3 className="text-left text-lg">{item[provider]}</h3>
           <div className="w-[100%] h-[250px]">
             <img
-              src={item[img]}
+              src={
+                imgId && imgId.active === true
+                  ? getProductById(item[img], imgId.it, imgId.table)
+                  : item[img]
+              }
               alt={`${table} - ${index}`}
               className="w-[100%] h-[100%] object-contain"
             />
@@ -134,7 +159,7 @@ function Card({
             }
           >
             <div>
-              <h2 className="text-sm mb-[0.5rem]">{categoria}:</h2>
+              <h2 className="text-sm mb-[0.5rem]">{categoria}</h2>
               <div className="flex ">
                 {pill === false ? (
                   <b>{item[categoria]}</b>
@@ -146,14 +171,15 @@ function Card({
               </div>
             </div>
             <div>
-              <span className="text-sm">{costo}:</span>
+              <span className="text-sm">{costo}</span>
               <br />
               <span className="text-lg">
                 {money === true ? "$" + item[costo] : item[costo]}
               </span>
             </div>
+
             <div>
-              <span className="text-sm">{costoMayor}:</span>
+              <span className="text-sm">{costoMayor}</span>
               <br />
               <span className="text-lg">
                 {money === true ? "$" + item[costoMayor] : item[costoMayor]}
@@ -168,9 +194,12 @@ function Card({
 
 Card.propTypes = {
   title: PropTypes.string.isRequired,
+  titleId: PropTypes.object,
   model: PropTypes.string.isRequired,
+  modelId: PropTypes.object,
   provider: PropTypes.string.isRequired,
   img: PropTypes.string,
+  imgId: PropTypes.object,
   description: PropTypes.string,
   object: PropTypes.array.isRequired,
   price: PropTypes.string,

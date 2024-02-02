@@ -18,29 +18,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 function Proveedores() {
   const [showMore, setShowMore] = useState(false);
   const [typeSelected, setTypeSelected] = useState(false);
-  const [showDetailCreated, setshowDetailCreated] = useState({});
-  const [showDetailUpdated, setshowDetailUpdated] = useState({});
   const [selectedRows, setSelectedRows] = useState([]);
-  const color = "#93c120";
-
-  const handleDetailCreatedClick = (rowId) => {
-    setshowDetailCreated((prevStates) => ({
-      ...prevStates,
-      [rowId]: !prevStates[rowId],
-    }));
-  };
-
-  const handleDetailUpdatedClick = (rowId) => {
-    setshowDetailUpdated((prevStates) => ({
-      ...prevStates,
-      [rowId]: !prevStates[rowId],
-    }));
-  };
-
-  const hideAll = () => {
-    setshowDetailCreated({});
-    setshowDetailUpdated({});
-  };
 
   const handleShowMore = () => {
     setShowMore(!showMore);
@@ -70,20 +48,37 @@ function Proveedores() {
     setTypeSelected(!typeSelected);
   };
 
+  const getProductById = function (id, it) {
+    const filteredProduct = all.productos.filter(
+      (product) => product.id === id
+    );
+    if (filteredProduct.length > 0) {
+      return filteredProduct[0][it];
+    } else {
+      return it + "no encontrado";
+    }
+  };
+
   const columns = [
     { field: "id", headerName: "ID", width: 10 },
-    { field: "name", headerName: "Name", width: 150 },
-    { field: "model", headerName: "Model", type: "number", width: 150 },
     {
-      field: "id_categoria",
-      headerName: "Category",
-      type: "number",
+      field: "name",
+      headerName: "Name",
       width: 150,
+      renderCell: (params) => getProductById(params.row.id_producto, "name"),
     },
     {
-      field: "description",
+      field: "model",
+      headerName: "Model",
+      width: 90,
+      renderCell: (params) => getProductById(params.row.id_producto, "model"),
+    },
+    {
+      field: "descriptiom",
       headerName: "Description",
       width: 300,
+      renderCell: (params) =>
+        getProductById(params.row.id_producto, "description"),
     },
     {
       field: "img",
@@ -92,86 +87,28 @@ function Proveedores() {
       renderCell: (params) => (
         <Avatar
           alt="img"
-          src={params.value}
+          src={getProductById(params.row.id_producto, "img")}
         />
       ),
     },
     {
-      field: "costIva",
-      headerName: "Cost",
-      width: 90,
-    },
-    {
-      field: "costMayor",
-      headerName: "P/ Mayor",
-      width: 90,
-    },
-    {
-      field: "costPVP",
-      headerName: "PVP",
-      width: 90,
-    },
-    {
-      field: "id_user_created",
-      headerName: "Created",
+      field: "id_producto",
+      headerName: "ID Producto",
+      width: 150,
       type: "number",
-      width: 50,
-      renderCell: (params) => (
-        <>
-          <div className="relative">
-            <span
-              className={`text-[${color}] cursor-pointer`}
-              onClick={() => {
-                handleDetailCreatedClick(params.row.id);
-              }}
-              onMouseLeave={hideAll}
-            >
-              <u>{params.value}</u>
-            </span>
-            <div
-              className={showDetailCreated[params.row.id] ? "fixed" : "hidden"}
-            >
-              <div className="bg-[#000] bg-opacity-50 rounded-md shadow-md p-2">
-                <p className="text-[#fff]">{all.users[params.value].name}</p>
-                <p className="text-[#fff]">
-                  {all.users[params.value].created_at}
-                </p>
-              </div>
-            </div>
-          </div>
-        </>
-      ),
     },
     {
-      field: "id_user_updated",
-      headerName: "Updated",
+      field: "stock",
+      headerName: "Stock",
       type: "number",
-      width: 50,
-      renderCell: (params) => (
-        <>
-          <div className="relative">
-            <span
-              className={`text-[${color}] cursor-pointer`}
-              onClick={() => {
-                handleDetailUpdatedClick(params.row.id);
-              }}
-              onMouseLeave={hideAll}
-            >
-              <u>{params.value}</u>
-            </span>
-            <div
-              className={showDetailUpdated[params.row.id] ? "fixed" : "hidden"}
-            >
-              <div className="bg-[#000] bg-opacity-50 rounded-md shadow-md p-2">
-                <p className="text-[#fff]">{all.users[params.value].name}</p>
-                <p className="text-[#fff]">
-                  {all.users[params.value].updated_at}
-                </p>
-              </div>
-            </div>
-          </div>
-        </>
-      ),
+      width: 70,
+    },
+    {
+      field: "min_stock",
+      headerName: "Min Stock",
+      width: 70,
+      renderCell: (params) =>
+        getProductById(params.row.id_producto, "minStock"),
     },
     {
       field: "actions",
@@ -234,7 +171,7 @@ function Proveedores() {
     },
   ];
 
-  const rows = all.productos;
+  const rows = all.inventarios;
 
   return (
     <>
@@ -271,24 +208,24 @@ function Proveedores() {
               }
             >
               <Card
-                title="name"
-                model="model"
+                title="id_producto"
+                titleId={{ active: true, it: "name", table: "productos" }}
+                model="id_producto"
+                modelId={{ active: true, it: "model", table: "productos" }}
                 provider="id_proveedor"
-                img="img"
+                img="id_producto"
+                imgId={{ active: true, it: "img", table: "productos" }}
                 description="description"
-                object={all.productos}
-                price="costPVP"
-                categoria="id_categoria"
-                costo="costIva"
-                costoMayor="costMayor"
-                pill={true}
-                money={true}
+                object={all.inventarios}
+                price="stock"
+                pill={false}
+                money={false}
                 table="Productos"
               />
             </div>
           </div>
         }
-        title="Productos"
+        title="Inventario"
       />
     </>
   );

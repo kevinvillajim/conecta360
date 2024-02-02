@@ -42,7 +42,6 @@ function Proveedores() {
     setshowDetailUpdated({});
   };
 
-  console.log(all);
   const handleShowMore = () => {
     setShowMore(!showMore);
   };
