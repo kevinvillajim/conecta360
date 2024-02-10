@@ -3,46 +3,55 @@ import KanbanBoard from "../../components/DragNDrop/KanbanBoard.tsx";
 import all from "../../components/all.js";
 
 function Teams() {
-  const supervisores = all.teams;
+	const supervisores = all.teams;
 
-  const defaultCols = [];
-  supervisores.map((supervisor) => {
-    const col = {
-      id: supervisor.id,
-      name: supervisor.name,
-    };
+	const getUserById = function (id, it, table) {
+		const filteredUser = all[table].filter((user) => user.id === id);
+		if (filteredUser.length > 0) {
+			return filteredUser[0][it];
+		} else {
+			return it + "no encontrado";
+		}
+	};
 
-    defaultCols.push(col);
-  });
+	const defaultCols = [];
+	supervisores.map((supervisor) => {
+		const col = {
+			id: supervisor.id,
+			name: getUserById(supervisor.id, "name", "users"), //cambiar
+		};
 
-  const asesores = all.users.filter((user) => user.id_rol === 3);
+		defaultCols.push(col);
+	});
 
-  const defaultTasks = [];
-  asesores.map((asesor) => {
-    const task = {
-      id: "asesor" + asesor.id,
-      id_user_leader: asesor.id_team,
-      content: asesor.name,
-    };
+	const asesores = all.users.filter((user) => user.id_rol === 3);
 
-    defaultTasks.push(task);
-  });
+	const defaultTasks = [];
+	asesores.map((asesor) => {
+		const task = {
+			id: "asesor" + asesor.id,
+			id_user_leader: asesor.id_team,
+			content: asesor.name,
+		};
 
-  return (
-    <>
-      <Template
-        content={
-          <div>
-            <KanbanBoard
-              defaultCols={defaultCols}
-              defaultTasks={defaultTasks}
-            />
-          </div>
-        }
-        title="Teams"
-      />
-    </>
-  );
+		defaultTasks.push(task);
+	});
+
+	return (
+		<>
+			<Template
+				content={
+					<div>
+						<KanbanBoard
+							defaultCols={defaultCols}
+							defaultTasks={defaultTasks}
+						/>
+					</div>
+				}
+				title="Teams"
+			/>
+		</>
+	);
 }
 
 export default Teams;
